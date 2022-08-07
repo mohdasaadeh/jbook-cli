@@ -1,3 +1,3 @@
-export default () => {
-  console.log("Hello, world!");
+export default (port: number, filename: string, dir: string) => {
+  console.log(port, filename, dir);
 };
