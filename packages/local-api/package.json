@@ -1,22 +1,31 @@
 {
-  "name": "local-api",
+  "name": "@mohdajbook/local-api",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc --watch --preserveWatchOutput"
+    "start": "tsc --watch --preserveWatchOutput",
+    "prepublishOnly": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "http-proxy-middleware": "^2.0.6",
-    "jbook": "^0.1.0",
+    "@mohdajbook/jbook": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
     "typescript": "^4.7.4"
   }
 }
