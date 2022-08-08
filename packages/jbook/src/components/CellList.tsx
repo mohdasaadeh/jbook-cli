@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import esbuild from "esbuild-wasm";
 
 import "./styles/cell-list.css";
-import { useTypedSelector } from "../hooks";
+import { useTypedSelector, useActionCreators } from "../hooks";
 import CellItem from "./CellItem";
 import InsertBar from "./InsertBar";
 
@@ -17,6 +17,8 @@ const CellList: React.FC = () => {
     });
   });
 
+  const { fetchCells } = useActionCreators();
+
   useEffect(() => {
     const startService = async () => {
       await esbuild.initialize({
@@ -26,6 +28,10 @@ const CellList: React.FC = () => {
     };
 
     startService();
+  }, []);
+
+  useEffect(() => {
+    fetchCells();
   }, []);
 
   const renderList = () => {

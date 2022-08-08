@@ -7,7 +7,14 @@ import parser from "prettier/parser-babel";
 import "./styles/code-editor.css";
 import "./styles/syntax.css";
 
-const CodeEditor: React.ForwardRefRenderFunction<any> = (props, ref) => {
+export interface CodeEditorProps {
+  content: string | undefined;
+}
+
+const CodeEditor: React.ForwardRefRenderFunction<any, CodeEditorProps> = (
+  { content },
+  ref
+) => {
   const editorRef = useRef<any>(null);
 
   const handleEditorDidMount = (
@@ -61,6 +68,7 @@ const CodeEditor: React.ForwardRefRenderFunction<any> = (props, ref) => {
         theme="vs-dark"
         language="javascript"
         height="100%"
+        defaultValue={content}
         options={{
           wordWrap: "on",
           minimap: { enabled: false },

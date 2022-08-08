@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
 import "./styles/code.css";
-import _CodeEditor from "./CodeEditor";
+import _CodeEditor, { CodeEditorProps } from "./CodeEditor";
 import CodePreview from "./CodePreview";
 import Resizable from "./Resizable";
 import { Cell } from "../redux";
@@ -11,7 +11,7 @@ import {
   useCumulativeCode,
 } from "../hooks";
 
-const CodeEditor = React.forwardRef<React.FC>(_CodeEditor);
+const CodeEditor = React.forwardRef<any, CodeEditorProps>(_CodeEditor);
 
 interface CodeProps {
   cell: Cell;
@@ -22,6 +22,9 @@ const Code: React.FC<CodeProps> = ({ cell }) => {
 
   const rawCode = useCumulativeCode(id);
 
+  const editorContent = useTypedSelector(
+    ({ cells }) => cells?.data[id].content
+  );
   const bundle = useTypedSelector(({ bundles }) => {
     if (bundles) return bundles[id];
   });
@@ -50,7 +53,7 @@ const Code: React.FC<CodeProps> = ({ cell }) => {
       <Resizable direction="vertical">
         <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
           <Resizable direction="horizontal">
-            <CodeEditor ref={codeEditorRef} />
+            <CodeEditor ref={codeEditorRef} content={editorContent} />
           </Resizable>
           <div className="code-preview-wrapper">
             {bundle && bundle.loading && (

@@ -2,6 +2,8 @@ import express from "express";
 import { createProxyMiddleware } from "http-proxy-middleware";
 import path from "path";
 
+import { cellsRouter } from "./routes/cells";
+
 export default (
   port: number,
   filename: string,
@@ -9,6 +11,8 @@ export default (
   isProxy: boolean
 ) => {
   const app = express();
+
+  app.use(cellsRouter(filename, dir));
 
   if (isProxy) {
     const jbook = require.resolve("jbook/build/index.html");
